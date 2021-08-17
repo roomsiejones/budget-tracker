@@ -43,20 +43,19 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <!-- before the index since index uses a db method -->
+  <script src="db.js"></script>
   <script src="index.js"></script>
-
-  <script type="text/javascript">
-      if('serviceworker' in navigator) {
-          navigator.serviceWorker.register('./service-worker.js', {
-            scope: '/'
-          })
-          .then((res) => {
-            console.log(res);
-            console.log("Registered successfully.");
-          })
-          .catch(error => console.log("Registration failed:", error));
-      }
-  </script>
+<!-- allows the serviceWorker -->
+<script type='text/javascript'>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("service-worker.js").then(reg => {
+        console.log("We found your service worker file!", reg);
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
